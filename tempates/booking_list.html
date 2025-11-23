@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Bookings</title>
+{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for booking in bookings %}
+        <li>{% if booking %}{{ booking }}{% endif %}</li>
+    {% endfor %}
+</ul>
+
+<form action="booking/" method="post">
+    <select name="rooms" id="rooms">
+        {% for room in rooms %}
+            <option value="{{ room.id }}">{{ room }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="start_time">Start time: </label>
+    <input type="datetime" name="start_time" id="start_time">
+
+    <label for="end_time">End time: </label>
+    <input type="datetime" name="end_time" id="end_time">
+</form>
+{% endblock content %}

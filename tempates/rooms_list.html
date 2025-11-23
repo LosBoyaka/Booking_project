@@ -4,10 +4,29 @@
 <title>Rooms</title>
 {% endblock title %}
 
+{% block nav_links %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link">Home</a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'bookings' %}" class="nav-link">Bookings</a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'rooms' %}" class="nav-link active" aria-current="page">Rooms</a>
+</li>
+{% endblock nav_links %}
+
 {% block content %}
-<ul>
-    {% for room in rooms %}
-        <li>{{ room }}</li>
-    {% endfor %}
-</ul>
-{% endblock content %}
+<form action="/rooms" method="get">
+    <select name="type" id="types">
+        <option value="">All types</option>
+        {% for room_type in types %}
+            <option {% if room_type == sel_type %}selected{% endif %}
+                    value="{{ room_type }}">
+                    {{ room_type }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="Filter">
+</form>
